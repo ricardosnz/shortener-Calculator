@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <script type="module" src="./js/shorten.js"></script>
+    <script type="module" src="./js/calc.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <section class="shorten">
+        <h1>Acorta tus enlaces</h1>
+        <form class="shorten-form">
+          <div>
+            <input
+              type="text"
+              placeholder="facebook.net/749247892"
+              id="shorten-entry"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <button>
+            Acortarlo
+          </button>
+        </form>
+      </section>
+      <section class="calc">
+        <div class="calc-screen">
+          <div class="calc-prev"></div>
+          <div class="calc-current"></div>
+        </div>
+        <div class="calc-operation">
+          <ul class="calc-numbers"></ul>
+          <ul class="calc-operators">
+            <li class="operator">
+              <span class="material-symbols-outlined"> trending_flat </span>
+            </li>
+            <li class="operator">+</li>
+            <li class="operator">-</li>
+            <li class="operator">x</li>
+          </ul>
+          <ul class="calc-result">
+            <li>
+              Reiniciar <span class="material-symbols-outlined"> next_plan </span>
+            </li>
+            <li>=</li>
+          </ul>
+        </div>
+      </section>
+      </section>
+    </main>
+  </body>
+</html>
