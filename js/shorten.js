@@ -1,53 +1,29 @@
 import getShorten from '../services/getShorten';
+import createShort from './createShort';
+import loadAndParserShortens from './loadAndParserShortens';
 
 const shortenContainer = document.querySelector('.shorten');
 
 const shortenForm = document.querySelector('.shorten-form');
 const shortenInput = document.getElementById('shorten-entry');
 
-let listShortens = [];
-let JSONShorten = window.localStorage.getItem('list');
+const JSONShorten = window.localStorage.getItem('shorts');
+let listShortens = loadAndParserShortens(JSONShorten, (shorted) =>
+  createShort(shorted, shortenContainer)
+);
 
-loadShorten();
 const deleteShortenBtns = document.querySelectorAll('.shorten-delete');
 const shortenContent = document.querySelectorAll('.shorten-content');
 
 const copyShortenBtns = document.querySelectorAll('.shorten-copy');
 let shortenResults = document.querySelectorAll('.shorten-result');
 
-function loadShorten() {
-  if (JSONShorten) {
-    let shortens = JSON.parse(JSONShorten);
-    listShortens = listShortens.concat(shortens);
-    if (listShortens.length >= 1) {
-      listShortens.map((shorted) => {
-        if (shorted) return createShort(shorted);
-      });
-    }
-  }
-}
-
-function createShort(content) {
-  let newShorten = document.createElement('article');
-  newShorten.classList.add('shorten-content');
-
-  newShorten.innerHTML = `
-  <p class="shorten-delete"><span class="material-symbols-outlined">
-  cancel
-  </span></p>
-  <h3>${content.linkOriginal}</h3>
-  <div>
-    <h2>Resultado: <span class="shorten-result">${
-      content.linkOne || content.linkTwo
-    }</span></h2>
-    <button class="shorten-copy">Copiar</button>
-  </div>`;
-  return shortenContainer.appendChild(newShorten);
-}
 
 shortenForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
-  let { linkOne, linkTwo, linkOriginal } = await getShorten(shortenInput.value);
+  const { linkOne, linkTwo, linkOriginal } = await getShorten(
+    shortenInput.value
+  );
   createShort({ linkOne, linkTwo, linkOriginal });
   listShortens = [{ linkOne, linkTwo, linkOriginal }, ...listShortens];
   window.localStorage.setItem('list', JSON.stringify(listShortens));

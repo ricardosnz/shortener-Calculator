@@ -3,9 +3,9 @@ const currentScreen = document.querySelector('.calc-current');
 const calcOperator = document.querySelector('.calc-operation');
 const equalBtn = document.querySelector('.calc-result');
 
-let numbers = ['.', 0, '/', 1, 2, 3, 4, 5, 6, 7, 8, 9];
+let numbers = ['.', 0, '/', 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse();
 
-numbers.reverse().map((number) => {
+numbers.forEach((number) => {
   let liNumber = document.createElement('li');
   number !== '/'
     ? liNumber.classList.add('number')
@@ -14,6 +14,7 @@ numbers.reverse().map((number) => {
   liNumber.innerHTML = number;
   calcOperator.firstElementChild.appendChild(liNumber);
 });
+
 const numberButtons = document.querySelectorAll('.number');
 const operationButtons = document.querySelectorAll('.operator');
 
@@ -27,10 +28,14 @@ numberButtons.forEach((number) => {
 
 operationButtons.forEach((operator) => {
   operator.addEventListener('click', () => {
-    if (currentScreen.innerText.length <= 0 && operator.innerText !== '-')
+    let textScreen = currentScreen.innerHTML;
+    const textOperador = operator.innerText;
+    if (!textScreen.length && textOperador !== '-') {
       return;
-    if (operator.innerText.includes('trending_flat')) {
-      return (currentScreen.innerHTML = currentScreen.innerText.slice(0, -1));
+    }
+    if (textOperador.includes('trending_flat')) {
+      currentScreen.innerHTML = textScreen.slice(0, -1);
+      return;
     } else if (operator.innerText == '-' && !currentScreen.innerHTML[0]) {
       currentScreen.innerHTML = '-';
     } else if (currentScreen.innerHTML.includes('-') || operator.innerText) {
