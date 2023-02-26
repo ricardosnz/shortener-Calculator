@@ -32,8 +32,10 @@ operationButtons.forEach((operator) => {
     let textScreen = currentScreen.innerHTML;
     const textOperador = operator.innerText;
     if (
-      (!textScreen.length && textOperador !== '-') ||
-      currentScreen.innerHTML.includes('-')
+      (!currentScreen.innerText.length && textOperador !== '-') ||
+      (currentScreen.innerText[0] === '-' &&
+        textOperador === '-' &&
+        currentScreen.innerText.length < 2)
     ) {
       return;
     }
