@@ -2,7 +2,11 @@ import getShorten from '../services/getShorten';
 import createShort from './createShort';
 import loadAndParserShortens from './loadAndParserShortens';
 
+import shortenCard from './shortenCard'
+
 const shortenContainer = document.querySelector('.shorten');
+
+shortenCard(shortenContainer)
 
 const shortenForm = document.querySelector('.shorten-form');
 const shortenInput = document.getElementById('shorten-entry');

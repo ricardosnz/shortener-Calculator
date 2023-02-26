@@ -1,19 +1,20 @@
 const prevScreen = document.querySelector('.calc-prev');
 const currentScreen = document.querySelector('.calc-current');
-const calcOperator = document.querySelector('.calc-operation');
+
+const numberContainer = document.querySelector('.calc-numbers');
+
 const equalBtn = document.querySelector('.calc-result');
 
-let numbers = ['.', 0, '/', 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse();
+const numbers = ['.', 0, '/', 1, 2, 3, 4, 5, 6, 7, 8, 9].reverse();
 
-numbers.forEach((number) => {
-  let liNumber = document.createElement('li');
-  number !== '/'
-    ? liNumber.classList.add('number')
-    : liNumber.classList.add('operator');
+const htmlListNumber = numbers
+  .map((number) => {
+    const classname = number !== '/' ? 'number' : 'operator';
+    return `<li class="${classname}">${number}</li>`;
+  })
+  .join('');
 
-  liNumber.innerHTML = number;
-  calcOperator.firstElementChild.appendChild(liNumber);
-});
+numberContainer.innerHTML = htmlListNumber;
 
 const numberButtons = document.querySelectorAll('.number');
 const operationButtons = document.querySelectorAll('.operator');
