@@ -31,7 +31,10 @@ operationButtons.forEach((operator) => {
   operator.addEventListener('click', () => {
     let textScreen = currentScreen.innerHTML;
     const textOperador = operator.innerText;
-    if (!textScreen.length && textOperador !== '-') {
+    if (
+      (!textScreen.length && textOperador !== '-') ||
+      currentScreen.innerHTML.includes('-')
+    ) {
       return;
     }
     if (textOperador.includes('trending_flat')) {
